@@ -1,0 +1,23 @@
+.Header {
+    padding-top: 50px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    /* padding-left: 80px; */
+  }
+  
+  .Song {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+  }
+  
+  .p1 {
+    display: flex;
+    justify-content: left;
+    padding-top: 50px;
+    /* width: 800px; */
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+  
