@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dotnet": "^1.1.4",
     "moment": "^2.29.3"
   }
 }

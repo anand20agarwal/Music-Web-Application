@@ -1,38 +1,28 @@
+require("dotenv").config();
 const express = require("express");
-const app = express();
-require("dotenv/config");
+const mongoose = require("mongoose");
 const cors = require("cors");
-const { default: mongoose } = require("mongoose");
+const admin = require("firebase-admin");
 
+const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json());
 
-// user authentication routes
-const userRoute = require("./routes/auth");
-app.use("/api/users/", userRoute);
+// MongoDB Connection
+mongoose.connect(process.env.DB_STRING, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
-// Artist links
-const artistsRoute = require("./routes/artists");
-app.use("/api/artists/", artistsRoute);
+// Firebase Admin Initialization
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
 
-// Album links
-const albumRoute = require("./routes/albums");
-app.use("/api/albums/", albumRoute);
+// Import Routes
+app.use("/api/users/", require("./routes/auth"));
+app.use("/api/artists/", require("./routes/artists"));
+app.use("/api/albums/", require("./routes/albums"));
+app.use("/api/songs/", require("./routes/songs"));
 
-// Songs links
-const songRoute = require("./routes/songs");
-app.use("/api/songs/", songRoute);
-
-// If any depreciation warning add depreciation options
-// mongoose.connect(process.env.DB_STRING, { useNewUrlParser: true }, () => {
-//   console.log("Mongodb Connected");
-// });
-
-mongoose.connect("mongodb+srv://anand20agarwal00:anand20agarwal00@cluster0.djtuepx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true });
-mongoose.connection
-  .once("open", () => console.log("Connected"))
-  .on("error", (error) => {
-    console.log(`Error : ${error}`);
-  });
-
-app.listen(4000, () => console.log("lisitening to port 4000"));
+// Start Server
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
