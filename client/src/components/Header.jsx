@@ -40,9 +40,9 @@ const Header = () => {
         {/* prettier-ignore */}
         <li className="mx-5 text-lg"><NavLink to={'/musics'} className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>Musics</NavLink></li>
         {/* prettier-ignore */}
-        <li className="mx-5 text-lg"><NavLink to={'/premium'} className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>Premium</NavLink></li>
+        {/* <li className="mx-5 text-lg"><NavLink to={'/premium'} className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>Premium</NavLink></li> */}
         {/* prettier-ignore */}
-        <li className="mx-5 text-lg"><NavLink to={'/contact'} className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>Contact</NavLink></li>
+        {/* <li className="mx-5 text-lg"><NavLink to={'/contact'} className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>Contact</NavLink></li> */}
       </ul>
 
       <div
@@ -74,13 +74,13 @@ const Header = () => {
             className="absolute z-10 top-12 right-0 w-275 p-4 gap-4 bg-card shadow-lg rounded-lg backdrop-blur-sm flex flex-col"
           >
             <NavLink to={"/userProfile"}>
-              <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
+              {/* <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
                 Profile
-              </p>
+              </p> */}
             </NavLink>
-            <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
+            {/* <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
               My Favourites
-            </p>
+            </p> */}
             <hr />
             {user?.user.role === "admin" && (
               <>
