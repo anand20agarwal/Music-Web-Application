@@ -1,7 +1,8 @@
 client/.env
 server/.env
 server/config/serviceAccountKey.json
-server/config/serviceAccount.json
+server/config/serviceAccount.jsonecho "server/config/serviceAccount.json" >> .gitignore
+
 
 
 ### Node ###

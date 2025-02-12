@@ -1,28 +1,38 @@
-require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const admin = require("firebase-admin");
-
 const app = express();
+require("dotenv/config");
+const cors = require("cors");
+const { default: mongoose } = require("mongoose");
+
 app.use(cors({ origin: true }));
 app.use(express.json());
 
-// MongoDB Connection
-mongoose.connect(process.env.DB_STRING, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
+// user authentication routes
+const userRoute = require("./routes/auth");
+app.use("/api/users/", userRoute);
 
-// Firebase Admin Initialization
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+// Artist links
+const artistsRoute = require("./routes/artists");
+app.use("/api/artists/", artistsRoute);
 
-// Import Routes
-app.use("/api/users/", require("./routes/auth"));
-app.use("/api/artists/", require("./routes/artists"));
-app.use("/api/albums/", require("./routes/albums"));
-app.use("/api/songs/", require("./routes/songs"));
+// Album links
+const albumRoute = require("./routes/albums");
+app.use("/api/albums/", albumRoute);
 
-// Start Server
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// Songs links
+const songRoute = require("./routes/songs");
+app.use("/api/songs/", songRoute);
+
+// If any depreciation warning add depreciation options
+// mongoose.connect(process.env.DB_STRING, { useNewUrlParser: true }, () => {
+//   console.log("Mongodb Connected");
+// });
+
+mongoose.connect(process.env.DB_STRING , { useNewUrlParser: true });
+mongoose.connection
+  .once("open", () => console.log("Connected"))
+  .on("error", (error) => {
+    console.log(`Error : ${error}`);
+  });
+
+app.listen(process.env.PORT || 4000, () => console.log("lisitening to port 4000"));
