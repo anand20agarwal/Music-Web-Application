@@ -17,7 +17,7 @@ router.get("/login", async (req, res) => {
     // checking user email already exists or not
     const userExists = await user.findOne({ user_id: decodeValue.user_id });
     if (!userExists) {
-      newUserData(decodeValue, req, res);
+      newUserData(decodeValue, req, res);   
     } else {
       updateUserData(decodeValue, req, res);
     }
