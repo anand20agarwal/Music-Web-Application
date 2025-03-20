@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { FaUsers } from "react-icons/fa";
-import { GiLoveSong, GiMusicalNotes } from "react-icons/gi";
+import { GiLoveSong, GiMusicalNotes } from "react-icons/gi"; 
 import { RiUserStarFill } from "react-icons/ri";
 import { getAllAlbums, getAllArtist, getAllSongs, getAllUsers } from "../api";
 import { actionType } from "../Context/reducer";
