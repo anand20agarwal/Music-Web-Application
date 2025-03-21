@@ -12,7 +12,7 @@ const userRoute = require("./routes/auth");
 app.use("/api/users/", userRoute);
 
 // Artist links
-const artistsRoute = require("./routes/artists");
+const artistsRoute = require("./routes/artists"); 
 app.use("/api/artists/", artistsRoute);
 
 // Album links
