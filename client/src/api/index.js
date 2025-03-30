@@ -8,7 +8,7 @@ export const validateUser = async (token) => {
       headers: {
         Authorization: "Bearer " + token,
       },
-    });
+    }); 
     return res.data;
   } catch (error) {
     return null;
